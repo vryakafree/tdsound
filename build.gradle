@@ -1,0 +1,49 @@
+plugins {
+    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'maven-publish'
+}
+
+group = 'com.vryakafree'
+version = '1.0.0'
+archivesBaseName = 'tdsound'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+repositories {
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://maven.cobblemon.com/releases' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.1'
+    mappings 'net.fabricmc:yarn:1.21.1+build.1:v2'
+    modImplementation 'net.fabricmc:fabric-loader:0.15.7'
+    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.97.0+1.21.1'
+
+    // Cobblemon 1.6.1+ (official)
+    modImplementation "com.cobblemon:cobblemon-fabric:1.6.1"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}

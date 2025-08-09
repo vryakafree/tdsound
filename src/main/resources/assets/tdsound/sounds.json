@@ -1,0 +1,22 @@
+{
+  "battle_theme": {
+    "sounds": [
+      "tdsound:battle_theme"
+    ]
+  },
+  "panic_theme": {
+    "sounds": [
+      "tdsound:panic_theme"
+    ]
+  },
+  "victory_sound": {
+    "sounds": [
+      "tdsound:victory_sound"
+    ]
+  },
+  "flee_sound": {
+    "sounds": [
+      "tdsound:flee_sound"
+    ]
+  }
+}
