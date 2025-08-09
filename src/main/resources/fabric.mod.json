@@ -1,1 +1,24 @@
-{\n  "schemaVersion": 1,\n  "id": "tdsound",\n  "version": "${version}",\n  "name": "TDSound Battle Music",\n  "description": "Dynamic battle music and sound effects for Cobblemon.",\n  "authors": ["DiEn212"],\n  "contact": {\n    "homepage": "https://github.com/vryakafree/tdsound"\n  },\n  "license": "MIT",\n  "environment": "*",\n  "entrypoints": {\n    "main": [\n      "com.vryakafree.tdsound.TDSoundMod"\n    ]\n  },\n  "depends": {\n    "fabricloader": ">=0.15.7",\n    "fabric": "*",\n    "minecraft": "1.21.1",\n    "cobblemon": ">=1.6.1"\n  }\n}
+{
+  "schemaVersion": 1,
+  "id": "tdsound",
+  "version": "${version}",
+  "name": "TDSound Battle Music",
+  "description": "Dynamic battle music and sound effects for Cobblemon.",
+  "authors": ["DiEn212"],
+  "contact": {
+    "homepage": "https://github.com/vryakafree/tdsound"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.vryakafree.tdsound.TDSoundMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.7",
+    "fabric": "*",
+    "minecraft": "1.21.1",
+    "cobblemon": ">=1.6.1"
+  }
+}

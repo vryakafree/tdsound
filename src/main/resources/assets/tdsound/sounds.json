@@ -1,22 +1,22 @@
 {
   "battle_theme": {
     "sounds": [
-      "tdsound:battle_theme"
+      { "name": "tdsound:battle_theme", "stream": true }
     ]
   },
   "panic_theme": {
     "sounds": [
-      "tdsound:panic_theme"
+      { "name": "tdsound:panic_theme", "stream": true }
     ]
   },
   "victory_sound": {
     "sounds": [
-      "tdsound:victory_sound"
+      { "name": "tdsound:victory_sound", "stream": true }
     ]
   },
   "flee_sound": {
     "sounds": [
-      "tdsound:flee_sound"
+      { "name": "tdsound:flee_sound", "stream": true }
     ]
   }
 }

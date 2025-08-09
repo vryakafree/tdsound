@@ -6,14 +6,22 @@ import com.cobblemon.mod.common.battles.BattleResult;
 import com.cobblemon.mod.common.pokemon.Pokemon;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import org.jetbrains.annotations.Nullable;
 
 public class TDSoundMod implements ModInitializer {
 
     public static final String MODID = "tdsound";
+
+    public static final SoundEvent BATTLE_THEME = registerSoundEvent("battle_theme");
+    public static final SoundEvent PANIC_THEME = registerSoundEvent("panic_theme");
+    public static final SoundEvent VICTORY_SOUND = registerSoundEvent("victory_sound");
+    public static final SoundEvent FLEE_SOUND = registerSoundEvent("flee_sound");
 
     @Override
     public void onInitialize() {
@@ -30,7 +38,7 @@ public class TDSoundMod implements ModInitializer {
     private void onBattleStart(BattleStartEvent event) {
         ServerPlayer player = safePlayer(event.getPlayer());
         if (player != null) {
-            playSound(player, "battle_theme");
+            playSound(player, BATTLE_THEME);
         }
     }
 
@@ -45,9 +53,9 @@ public class TDSoundMod implements ModInitializer {
 
         double hpPercent = (double) pokemon.getHealth() / pokemon.getMaxHealth();
         if (hpPercent <= 0.20) {
-            playSound(player, "panic_theme");
+            playSound(player, PANIC_THEME);
         } else if (hpPercent >= 0.21) {
-            playSound(player, "battle_theme");
+            playSound(player, BATTLE_THEME);
         }
     }
 
@@ -56,7 +64,7 @@ public class TDSoundMod implements ModInitializer {
         if (fainted.isOpponent() && fainted.getHealth() == 0) {
             ServerPlayer player = safePlayer(event.getBattle().getPlayer());
             if (player != null) {
-                playSound(player, "victory_sound");
+                playSound(player, VICTORY_SOUND);
             }
         }
     }
@@ -65,14 +73,13 @@ public class TDSoundMod implements ModInitializer {
         if (event.getResult() == BattleResult.FLEE || event.getResult() == BattleResult.DEFEAT) {
             ServerPlayer player = safePlayer(event.getPlayer());
             if (player != null) {
-                playSound(player, "flee_sound");
+                playSound(player, FLEE_SOUND);
             }
         }
     }
 
-    public void playSound(ServerPlayer player, String soundId) {
-        ResourceLocation sound = new ResourceLocation(MODID, soundId);
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.getHolderOrThrow(sound).value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+    public void playSound(ServerPlayer player, SoundEvent soundEvent) {
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
     @Nullable
@@ -80,5 +87,10 @@ public class TDSoundMod implements ModInitializer {
         if (playerObj instanceof ServerPlayer)
             return (ServerPlayer) playerObj;
         return null;
+    }
+
+    private static SoundEvent registerSoundEvent(String path) {
+        ResourceLocation id = new ResourceLocation(MODID, path);
+        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 }

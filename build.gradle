@@ -24,6 +24,9 @@ dependencies {
 
     // Cobblemon 1.6.1+ (official)
     modImplementation "com.cobblemon:cobblemon-fabric:1.6.1"
+
+    // Optional annotations
+    compileOnly 'org.jetbrains:annotations:24.1.0'
 }
 
 processResources {
