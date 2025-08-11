@@ -5,10 +5,11 @@ plugins {
 
 group = 'com.vryakafree'
 version = '1.0.0'
-archivesBaseName = 'tdsound'
+base {
+    archivesName = 'tdsound'
+}
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+// Using toolchain for Java version; source/target compatibility inferred
 
 repositories {
     maven { url = 'https://maven.fabricmc.net/' }
@@ -37,6 +38,9 @@ processResources {
 }
 
 java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
     withSourcesJar()
 }
 
